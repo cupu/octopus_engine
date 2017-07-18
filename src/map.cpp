@@ -285,13 +285,13 @@ void Map::add_layer(Layer_Types type) {
 void Map::delete_layer(const std::string& name) {
     auto cap_name = capitalize(name);
     // Delete any matching object layer and its object
-    for (auto& layer = object_layers.begin(); layer != object_layers.end();)
+    for (auto layer = object_layers.begin(); layer != object_layers.end();)
     {
         if (capitalize((*layer)->name) != cap_name)
         {
             layer++;
         } else {
-            auto& obj_layer = static_cast<Object_Layer*>(*layer);
+            auto obj_layer = *layer;
             for (auto& obj : obj_layer->objects)
             {
                 objects.erase(obj->get_name());
